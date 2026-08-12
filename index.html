@@ -6,27 +6,245 @@
   <meta name="description" content="SubtitleFlow — відкритий перекладач SRT-субтитрів українською без зміни таймкодів.">
   <title>SubtitleFlow — переклад субтитрів українською</title>
   <style>
-    :root{--ink:#162118;--muted:#647068;--paper:#f8f7f1;--white:#fffef9;--green:#215f43;--deep:#153e2d;--lime:#d9ee45;--line:#d9ded8}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,sans-serif}button,input,select,textarea{font:inherit}button{color:inherit}main{min-height:100vh;background-image:radial-gradient(circle at 90% 12%,rgba(217,238,69,.18),transparent 25rem)}
-    header,.hero,.workspace,footer{max-width:1180px;margin:auto}.site-header{padding:28px 28px 16px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:11px;color:var(--ink);text-decoration:none;font-weight:800;font-size:20px}.brand-mark{width:39px;height:39px;border-radius:12px;background:var(--green);color:#fff;display:grid;place-items:center;font-size:12px}.mission{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px}.flag{width:18px;height:12px;border-radius:2px;background:linear-gradient(#2f70d4 0 50%,#f2ce38 50%)}
-    .hero{padding:76px 28px 58px;display:grid;grid-template-columns:minmax(0,1.45fr) minmax(300px,.75fr);align-items:center;gap:80px}.eyebrow{margin:0 0 16px;color:var(--green);text-transform:uppercase;font-size:11px;font-weight:800;letter-spacing:.16em}.hero h1{margin:0;font-size:clamp(45px,6vw,78px);line-height:.98;letter-spacing:-.065em;max-width:800px}.hero h1 em{color:var(--green);font-family:Georgia,serif;font-weight:500}.lead{max-width:690px;margin:30px 0 24px;color:#536057;font-size:18px;line-height:1.65}.trust-row{display:flex;flex-wrap:wrap;gap:10px 24px;color:var(--muted);font-size:12px}.trust-row span:before{content:"✓";color:var(--green);font-weight:900;margin-right:7px}.quote-card{background:var(--deep);color:#fff;padding:32px;border-radius:2px 28px;transform:rotate(1.4deg);box-shadow:0 24px 55px rgba(20,61,44,.18)}.quote-time{font:10px monospace;color:#9cb7a5}.quote-card p{font-size:21px;line-height:1.35;margin:21px 0}.quote-card .uk{color:var(--lime);font-weight:700}.quote-rule{width:55px;height:1px;background:#6e907c}
-    .workspace{padding:0 28px 54px}.steps{display:flex;align-items:center;justify-content:center;margin:0 auto 18px;color:#929a94;font-size:12px;font-weight:700}.steps span{display:flex;align-items:center;gap:7px}.steps b{width:22px;height:22px;display:grid;place-items:center;border:1px solid #c9ceca;border-radius:50%;font-size:10px}.steps .active{color:var(--green)}.steps .active b{border-color:var(--green);background:var(--green);color:#fff}.steps .complete b{color:#fff;background:var(--green);border-color:var(--green)}.steps i{width:70px;height:1px;background:#d2d6d3;margin:0 12px}
-    .upload-panel{min-height:340px;background:var(--white);border:1px solid var(--line);border-radius:24px;padding:20px;box-shadow:0 18px 45px rgba(30,55,39,.07)}.drop-zone{width:100%;min-height:255px;border:1.5px dashed #aebcaf;border-radius:16px;background:#fbfcf8;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:.2s}.drop-zone:hover,.drop-zone.dragging{background:#f2f7e8;border-color:var(--green);transform:translateY(-2px)}.upload-icon{width:50px;height:50px;display:grid;place-items:center;border-radius:50%;background:var(--green);color:#fff;font-size:25px;margin-bottom:18px}.drop-zone strong{font-size:18px;margin-bottom:7px}.drop-zone span:not(.upload-icon){color:var(--muted);font-size:13px}.drop-zone small{margin-top:20px;color:#909991;font:10px monospace}.sample-button{border:0;background:transparent;display:block;margin:15px auto 0;cursor:pointer;color:var(--green);font-size:12px;font-weight:700}
-    .translator-grid{display:grid;grid-template-columns:330px minmax(0,1fr);background:var(--white);border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:0 18px 45px rgba(30,55,39,.08);min-height:600px}.settings-panel{padding:25px;border-right:1px solid var(--line);background:#fbfbf7}.file-chip{display:flex;align-items:center;gap:11px;padding:12px;background:#fff;border:1px solid var(--line);border-radius:13px;margin-bottom:26px}.file-icon{width:39px;height:39px;display:grid;place-items:center;border-radius:9px;background:#e5efe7;color:var(--green);font-size:9px;font-weight:900}.file-chip div{min-width:0;flex:1}.file-chip strong,.file-chip small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.file-chip strong{font-size:12px}.file-chip small{color:var(--muted);margin-top:3px;font-size:10px}.file-chip button{border:0;background:transparent;color:#909890;font-size:20px;cursor:pointer}.settings-panel label{display:block;margin:0 0 18px;font-size:11px;font-weight:750;color:#38443c}.optional{float:right;color:#9ba29c;font-size:9px;font-weight:500}select,.settings-panel textarea,.access-input{width:100%;margin-top:8px;border:1px solid #d5dbd5;border-radius:10px;background:#fff;color:var(--ink);outline:none}select,.access-input{height:43px;padding:0 12px}.settings-panel textarea{min-height:112px;resize:vertical;padding:11px 12px;line-height:1.5;font-size:12px}.primary-button{width:100%;min-height:47px;border:0;border-radius:11px;padding:0 15px;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-size:12px;font-weight:750}.primary-button:disabled{cursor:wait;opacity:.65}.privacy-note{color:#8b948d;font-size:9px;text-align:center;line-height:1.5;margin:13px 0 0}.progress-wrap{margin:14px 0 0}.progress-track{height:7px;border-radius:10px;background:#dfe6de;overflow:hidden}.progress-fill{height:100%;width:0;background:var(--lime);transition:width .25s}.progress-text{display:block;margin-top:7px;color:#69736c;font-size:10px;line-height:1.4}
-    .preview-panel{min-width:0;display:flex;flex-direction:column}.preview-head{padding:25px 28px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}.preview-head .eyebrow{font-size:9px;margin-bottom:5px}.preview-head h2{margin:0;font-size:22px}.count{display:flex;align-items:baseline;gap:4px;color:var(--muted)}.count b{color:var(--green);font-size:24px}.count span{font-size:10px}.cue-list{padding:5px 28px 25px;max-height:570px;overflow:auto}.cue{display:grid;grid-template-columns:95px minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start;padding:19px 0;border-bottom:1px solid #e7e9e5}.cue-meta{font:9px monospace;color:#8d968f;padding-top:5px}.cue-meta span,.cue-meta time{display:block}.cue-meta span{color:var(--green);font-weight:800;margin-bottom:5px}.cue p{white-space:pre-wrap;margin:0;font-size:13px;line-height:1.55}.cue textarea{width:100%;min-height:62px;resize:vertical;border:1px solid transparent;border-radius:8px;background:#f4f6f1;padding:9px 10px;font-size:13px;line-height:1.45}.download-bar{margin-top:auto;border-top:1px solid var(--line);background:#eff4ed;padding:18px 28px;display:flex;justify-content:space-between;align-items:center;gap:20px}.download-bar strong,.download-bar div span{display:block}.download-bar div span{margin-top:4px;font-size:9px;color:var(--muted)}.download-bar button{border:0;border-radius:10px;background:var(--green);color:#fff;padding:12px 16px;cursor:pointer;font-size:11px;font-weight:750}
-    .error{margin:14px 0 0;border:1px solid #e7b8b0;background:#fff3f0;color:#6e2922;border-radius:12px;padding:12px 16px;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;font-size:12px}.error button{border:0;background:transparent;cursor:pointer;font-size:20px}footer{padding:22px 28px 36px;border-top:1px solid #dfe2dc;color:#899089;display:flex;justify-content:space-between;font-size:10px}.hidden{display:none!important}.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
-    @media(max-width:850px){.hero{grid-template-columns:1fr;gap:32px;padding-top:50px}.quote-card{max-width:500px}.translator-grid{grid-template-columns:1fr}.settings-panel{border-right:0;border-bottom:1px solid var(--line)}}@media(max-width:600px){.site-header{padding:20px 18px 10px}.mission{font-size:0}.hero{padding:46px 18px 38px}.hero h1{font-size:45px}.lead{font-size:16px}.workspace{padding:0 12px 35px}.steps i{width:22px;margin:0 7px}.steps span{font-size:10px}.upload-panel{padding:10px}.drop-zone{min-height:270px;padding:20px;text-align:center}.translator-grid{border-radius:18px}.settings-panel{padding:18px}.preview-head,.cue-list{padding-left:18px;padding-right:18px}.cue{grid-template-columns:65px 1fr;gap:12px}.cue textarea{grid-column:2}.download-bar{align-items:stretch;flex-direction:column;padding:16px 18px}.error{grid-template-columns:1fr auto}.error span{grid-row:2}footer{padding:20px 18px 30px;flex-direction:column;gap:7px}}
-  </style>
+
+:root {
+  --ink: #162118;
+  --muted: #647068;
+  --paper: #f8f7f1;
+  --white: #fffef9;
+  --green: #215f43;
+  --green-deep: #153e2d;
+  --lime: #d9ee45;
+  --line: #d9ded8;
+  --blue: #2e6de6;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: Arial, sans-serif; }
+button, input, select, textarea { font: inherit; }
+button { color: inherit; }
+
+main { min-height: 100vh; background: var(--paper); }
+.site-header { max-width: 1180px; margin: 0 auto; padding: 22px 28px; display: flex; align-items: center; justify-content: space-between; }
+.brand { display: inline-flex; align-items: center; gap: 11px; color: var(--ink); text-decoration: none; font-weight: 780; letter-spacing: -.03em; font-size: 20px; }
+.brand-mark { width: 38px; height: 38px; border-radius: 11px; background: var(--green-deep); color: var(--lime); display: grid; place-items: center; font-size: 11px; letter-spacing: .04em; box-shadow: inset 0 0 0 1px rgba(255,255,255,.12); }
+.header-note { padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.72); font-size: 11px; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+.status-dot { width: 7px; height: 7px; border-radius: 50%; background: #4ba873; box-shadow: 0 0 0 4px rgba(75,168,115,.12); }
+.flag { width: 18px; height: 12px; border-radius: 2px; background: linear-gradient(#2f70d4 0 50%, #f2ce38 50%); box-shadow: 0 0 0 1px rgba(0,0,0,.06); }
+
+.hero { max-width: 1124px; margin: 0 auto 26px; min-height: 460px; padding: 52px 58px; border: 1px solid #d7ddd7; border-radius: 28px; background: linear-gradient(135deg,#fffef9 0%,#f5f7ec 70%,#edf4d5 100%); display: grid; grid-template-columns: minmax(0,1.12fr) minmax(360px,.88fr); align-items: center; gap: 60px; position: relative; overflow: hidden; box-shadow: 0 24px 70px rgba(24,52,36,.08); }
+.hero::before { content: ""; position: absolute; width: 340px; height: 340px; border-radius: 50%; right: -150px; top: -190px; border: 70px solid rgba(217,238,69,.18); }
+.hero-copy { position: relative; z-index: 1; }
+.hero-kicker { display: inline-flex; align-items: center; gap: 9px; margin: 0 0 20px; padding: 7px 10px; border-radius: 7px; background: rgba(255,255,255,.75); border: 1px solid #dce2d5; color: #455149; font-size: 10px; font-weight: 750; letter-spacing: .02em; }
+.eyebrow { margin: 0 0 16px; color: var(--green); text-transform: uppercase; font-size: 11px; font-weight: 800; letter-spacing: .16em; }
+.hero h1 { margin: 0; font-size: clamp(44px,4.8vw,64px); line-height: 1.02; letter-spacing: -.06em; max-width: 680px; font-weight: 750; }
+.hero h1 em { color: var(--green); font-family: Georgia, serif; font-weight: 500; }
+.lead { max-width: 610px; margin: 24px 0 26px; color: #536057; font-size: 16px; line-height: 1.65; }
+.lead strong { color: var(--ink); }
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 24px; }
+.hero-primary { min-height: 46px; display: inline-flex; align-items: center; gap: 22px; padding: 0 17px; border: 0; border-radius: 11px; background: var(--green); color: white; text-decoration: none; cursor: pointer; font-size: 12px; font-weight: 750; box-shadow: 0 12px 24px rgba(33,95,67,.2); }
+.hero-primary:hover { background: #194b34; transform: translateY(-1px); }
+.hero-secondary { min-height: 46px; padding: 0 15px; border: 1px solid #cfd7cf; border-radius: 11px; background: rgba(255,255,255,.65); color: #354239; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+.hero-secondary:hover { background: white; }
+.trust-row { display: flex; flex-wrap: wrap; gap: 10px 20px; color: var(--muted); font-size: 10px; }
+.trust-row span::before { content: "✓"; color: var(--green); font-weight: 900; margin-right: 7px; }
+.hero-upload { position: relative; z-index: 1; padding: 13px; border: 1px solid #d5dcd5; border-radius: 20px; background: rgba(255,255,255,.8); box-shadow: 0 24px 55px rgba(21,62,45,.12); }
+.hero-drop-zone { width: 100%; min-height: 255px; padding: 24px; border: 1.5px dashed #9fb0a3; border-radius: 14px; background: #fbfcf7; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; cursor: pointer; transition: .2s ease; }
+.hero-drop-zone:hover,.hero-drop-zone.dragging { border-color: var(--green); background: #f1f6e8; transform: translateY(-2px); }
+.hero-drop-zone strong { margin-bottom: 7px; font-size: 17px; }
+.hero-drop-zone > span:not(.upload-icon) { color: var(--muted); font-size: 12px; }
+.hero-drop-zone small { margin-top: 18px; color: #8d978f; font-family: monospace; font-size: 9px; letter-spacing: .08em; }
+.hero-file-ready { position: relative; z-index: 1; min-height: 250px; padding: 34px; border: 1px solid #d5dcd5; border-radius: 20px; background: rgba(255,255,255,.84); box-shadow: 0 24px 55px rgba(21,62,45,.12); display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
+.hero-file-ready .file-icon { width: 48px; height: 48px; margin-bottom: 22px; }
+.hero-file-ready div small,.hero-file-ready div strong,.hero-file-ready div span { display: block; }
+.hero-file-ready div small { color: var(--green); font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; }
+.hero-file-ready div strong { max-width: 290px; margin: 6px 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 18px; }
+.hero-file-ready div span { color: var(--muted); font-size: 11px; }
+.hero-file-ready > a { margin-top: 22px; color: var(--green); font-size: 12px; font-weight: 800; text-decoration: none; }
+.subtitle-demo { position: relative; z-index: 1; background: var(--green-deep); color: white; border: 1px solid rgba(255,255,255,.12); border-radius: 18px; box-shadow: 0 26px 60px rgba(21,62,45,.23); overflow: hidden; transform: rotate(.5deg); }
+.demo-top { min-height: 47px; padding: 0 15px; border-bottom: 1px solid rgba(255,255,255,.1); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; font-size: 10px; }
+.demo-top > span { display: flex; gap: 5px; }.window-dot { width: 6px; height: 6px; border-radius: 50%; background: #638170; }.window-dot:nth-child(2){opacity:.7}.window-dot:nth-child(3){opacity:.4}
+.demo-top b { font-weight: 600; color: #c8d8cd; }.demo-top small { justify-self: end; color: var(--lime); font-weight: 800; }
+.demo-cue { display: grid; grid-template-columns: 35px 78px 1fr; gap: 10px; align-items: start; padding: 20px 17px; }
+.demo-cue time,.demo-number { font-family: monospace; font-size: 8px; color: #91aa9a; padding-top: 4px; }.demo-number { color: var(--lime); font-weight: 800; }.demo-cue div small { color: #7f9d8b; font-size: 8px; font-weight: 800; letter-spacing: .12em; }.demo-cue p { margin: 7px 0 0; font-size: 15px; line-height: 1.4; }
+.demo-arrow { height: 20px; display: grid; place-items: center; margin: -7px 17px; color: #789582; font-size: 12px; }
+.demo-cue.translated { margin: 0 9px 9px; border-radius: 11px; background: rgba(217,238,69,.09); }.demo-cue.translated p { color: var(--lime); font-weight: 680; }
+.demo-footer { display: flex; justify-content: space-between; gap: 15px; padding: 13px 17px; border-top: 1px solid rgba(255,255,255,.1); background: rgba(0,0,0,.08); color: #8da696; font-size: 8px; }.demo-footer b { color: white; }
+
+.workspace { max-width: 1180px; margin: 0 auto; padding: 14px 28px 54px; scroll-margin-top: 16px; }
+.hero-error { max-width: 1124px; margin: -10px auto 28px; }
+.steps { display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; color: #929a94; font-size: 12px; font-weight: 650; }
+.steps span { display: flex; align-items: center; gap: 7px; }
+.steps b { width: 22px; height: 22px; display: grid; place-items: center; border: 1px solid #c9ceca; border-radius: 50%; font-size: 10px; }
+.steps .active { color: var(--green); }
+.steps .active b { border-color: var(--green); background: var(--green); color: white; }
+.steps .complete b { color: transparent; background: var(--green); border-color: var(--green); position: relative; }
+.steps .complete b::after { content: "✓"; position: absolute; color: white; }
+.steps i { width: 70px; height: 1px; background: #d2d6d3; margin: 0 12px; }
+
+.upload-panel { min-height: 340px; background: var(--white); border: 1px solid var(--line); border-radius: 24px; padding: 20px; box-shadow: 0 18px 45px rgba(30,55,39,.07); }
+.drop-zone { width: 100%; min-height: 255px; border: 1.5px dashed #aebcaf; border-radius: 16px; background: #fbfcf8; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: .2s ease; }
+.drop-zone:hover, .drop-zone.dragging { background: #f2f7e8; border-color: var(--green); transform: translateY(-2px); }
+.upload-icon { width: 50px; height: 50px; display: grid; place-items: center; border-radius: 50%; background: var(--green); color: white; font-size: 25px; margin-bottom: 18px; }
+.drop-zone strong { font-size: 18px; margin-bottom: 7px; }
+.drop-zone > span:not(.upload-icon) { color: var(--muted); font-size: 13px; }
+.drop-zone small { margin-top: 20px; color: #909991; font-family: monospace; font-size: 10px; letter-spacing: .05em; }
+.sample-button { border: 0; background: transparent; display: block; margin: 15px auto 0; cursor: pointer; color: var(--green); font-size: 12px; font-weight: 700; }
+.sample-button span { margin-left: 7px; }
+
+.translator-grid { display: grid; grid-template-columns: 330px minmax(0, 1fr); background: var(--white); border: 1px solid var(--line); border-radius: 24px; overflow: hidden; box-shadow: 0 18px 45px rgba(30,55,39,.08); min-height: 600px; }
+.settings-panel { padding: 25px; border-right: 1px solid var(--line); background: #fbfbf7; }
+.file-chip { display: flex; align-items: center; gap: 11px; padding: 12px; background: white; border: 1px solid var(--line); border-radius: 13px; margin-bottom: 26px; }
+.file-icon { width: 39px; height: 39px; display: grid; place-items: center; border-radius: 9px; background: #e5efe7; color: var(--green); font-size: 9px; font-weight: 900; }
+.file-chip div { min-width: 0; flex: 1; }
+.file-chip strong, .file-chip small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.file-chip strong { font-size: 12px; }
+.file-chip small { color: var(--muted); margin-top: 3px; font-size: 10px; }
+.file-chip button { border: 0; background: transparent; color: #909890; font-size: 20px; cursor: pointer; }
+.settings-panel label { display: block; margin: 0 0 18px; font-size: 11px; font-weight: 750; color: #38443c; }
+.optional { float: right; color: #9ba29c; font-size: 9px; font-weight: 500; }
+select, .settings-panel textarea { width: 100%; margin-top: 8px; border: 1px solid #d5dbd5; border-radius: 10px; background: white; color: var(--ink); outline: none; }
+select { height: 43px; padding: 0 12px; }
+.settings-panel textarea { min-height: 112px; resize: vertical; padding: 11px 12px; line-height: 1.5; font-size: 12px; }
+select:focus, textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(33,95,67,.08); }
+.primary-button { width: 100%; min-height: 47px; border: 0; border-radius: 11px; padding: 0 15px; background: var(--green); color: white; display: flex; align-items: center; justify-content: space-between; cursor: pointer; font-size: 12px; font-weight: 750; box-shadow: 0 10px 22px rgba(33,95,67,.2); }
+.primary-button:hover { background: #194b34; }
+.primary-button:disabled { cursor: wait; opacity: .8; }
+.progress { height: 4px; background: #dfe6df; border-radius: 10px; margin-top: 10px; overflow: hidden; }
+.progress span { height: 100%; background: var(--lime); display: block; transition: width .3s ease; }
+.privacy-note { color: #8b948d; font-size: 9px; text-align: center; line-height: 1.5; margin: 13px 0 0; }
+
+.preview-panel { min-width: 0; display: flex; flex-direction: column; }
+.preview-head { padding: 25px 28px 18px; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; }
+.preview-head .eyebrow { font-size: 9px; margin-bottom: 5px; }
+.preview-head h2 { margin: 0; font-size: 22px; letter-spacing: -.03em; }
+.count { display: flex; align-items: baseline; gap: 4px; color: var(--muted); }
+.count b { color: var(--green); font-size: 24px; }
+.count span { font-size: 10px; }
+.cue-list { padding: 5px 28px 25px; max-height: 570px; overflow: auto; }
+.cue { display: grid; grid-template-columns: 95px minmax(0, 1fr) minmax(0, 1fr); gap: 20px; align-items: start; padding: 19px 0; border-bottom: 1px solid #e7e9e5; }
+.cue-meta { font-family: monospace; font-size: 9px; color: #8d968f; padding-top: 5px; }
+.cue-meta span, .cue-meta time { display: block; }
+.cue-meta span { color: var(--green); font-weight: 800; margin-bottom: 5px; }
+.cue p { white-space: pre-wrap; margin: 0; font-size: 13px; line-height: 1.55; }
+.cue textarea { width: 100%; min-height: 62px; resize: vertical; border: 1px solid transparent; border-radius: 8px; background: #f4f6f1; padding: 9px 10px; font-size: 13px; line-height: 1.45; }
+.cue textarea::placeholder { color: #a2a9a2; }
+.more-note { color: var(--muted); text-align: center; font-size: 11px; padding: 18px; }
+.download-bar { margin-top: auto; border-top: 1px solid var(--line); background: #eff4ed; padding: 18px 28px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+.download-bar strong, .download-bar span { display: block; }
+.download-bar strong { font-size: 12px; }
+.download-bar div span { margin-top: 4px; font-size: 9px; color: var(--muted); }
+.download-bar button { border: 0; border-radius: 10px; background: var(--green); color: white; padding: 12px 16px; cursor: pointer; font-size: 11px; font-weight: 750; }
+.download-bar button span { display: inline; margin-left: 8px; }
+
+.error { margin: 14px 0 0; border: 1px solid #e7b8b0; background: #fff3f0; color: #6e2922; border-radius: 12px; padding: 12px 16px; display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; font-size: 12px; }
+.error button { border: 0; background: transparent; cursor: pointer; font-size: 20px; }
+.example-section { max-width: 1124px; margin: 8px auto 64px; padding: 42px 58px; border-top: 1px solid var(--line); display: grid; grid-template-columns: minmax(0,.8fr) minmax(380px,1.2fr); align-items: center; gap: 80px; scroll-margin-top: 24px; }
+.example-copy h2 { max-width: 390px; margin: 0; font-size: 32px; line-height: 1.08; letter-spacing: -.04em; }
+.example-copy > p:last-child { max-width: 410px; margin: 18px 0 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+.example-section .subtitle-demo { transform: none; }
+footer { max-width: 1180px; margin: 0 auto; padding: 22px 28px 36px; border-top: 1px solid #dfe2dc; color: #899089; display: flex; justify-content: space-between; font-size: 10px; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+@media (max-width: 850px) {
+  .hero { margin-left: 20px; margin-right: 20px; grid-template-columns: 1fr; gap: 36px; padding: 46px; }
+  .subtitle-demo { max-width: 560px; }
+  .example-section { margin-left: 20px; margin-right: 20px; padding: 38px 26px; grid-template-columns: 1fr; gap: 30px; }
+  .translator-grid { grid-template-columns: 1fr; }
+  .settings-panel { border-right: 0; border-bottom: 1px solid var(--line); }
+}
+
+@media (max-width: 600px) {
+  .site-header { padding: 20px 18px 10px; }
+  .header-note { padding: 8px; font-size: 0; }
+  .hero { min-height: 0; margin: 12px 10px 20px; padding: 32px 22px 24px; border-radius: 21px; gap: 28px; }
+  .hero-kicker { line-height: 1.3; }
+  .hero h1 { font-size: 40px; }
+  .lead { margin: 20px 0 22px; font-size: 14px; }
+  .hero-actions { align-items: stretch; flex-direction: column; }
+  .hero-primary,.hero-secondary { width: 100%; justify-content: center; }
+  .trust-row { gap: 8px 14px; }
+  .hero-drop-zone { min-height: 230px; }
+  .demo-cue { grid-template-columns: 30px 1fr; }.demo-cue time { display: none; }
+  .workspace { padding: 0 12px 35px; }
+  .steps i { width: 22px; margin: 0 7px; }
+  .steps span { font-size: 10px; }
+  .upload-panel { padding: 10px; }
+  .drop-zone { min-height: 270px; padding: 20px; text-align: center; }
+  .translator-grid { border-radius: 18px; }
+  .settings-panel { padding: 18px; }
+  .preview-head, .cue-list { padding-left: 18px; padding-right: 18px; }
+  .cue { grid-template-columns: 65px 1fr; gap: 12px; }
+  .cue textarea { grid-column: 2; }
+  .download-bar { align-items: stretch; flex-direction: column; padding: 16px 18px; }
+  .error { grid-template-columns: 1fr auto; }
+  .error span { grid-row: 2; }
+  .hero-error { margin: -8px 12px 24px; }
+  .example-section { margin: 8px 12px 42px; padding: 30px 10px; }
+  .example-copy { padding: 0 10px; }
+  .example-copy h2 { font-size: 27px; }
+  footer { padding: 20px 18px 30px; flex-direction: column; gap: 7px; }
+}
+
+.access-input{width:100%;height:43px;margin-top:8px;padding:0 12px;border:1px solid #d5dbd5;border-radius:10px;background:#fff;color:var(--ink);outline:none}
+.progress-wrap{margin:14px 0 0}.progress-track{height:7px;border-radius:10px;background:#dfe6de;overflow:hidden}.progress-fill{height:100%;width:0;background:var(--lime);transition:width .25s}.progress-text{display:block;margin-top:7px;color:#69736c;font-size:10px;line-height:1.4}
+.hidden{display:none!important}
+
+</style>
 </head>
 <body>
 <main>
-  <header class="site-header"><a class="brand" href="#top"><span class="brand-mark">СФ</span><span>SubtitleFlow</span></a><div class="mission"><span class="flag"></span>Робимо українське доступнішим</div></header>
-  <section class="hero" id="top"><div><p class="eyebrow">Перекладач субтитрів українською</p><h1>Таймкоди на місці.<br><em>Українська — природна.</em></h1><p class="lead">Завантажуй файл <strong>.srt</strong>, отримуй живий переклад із контекстом і редагуй кожну репліку перед завантаженням.</p><div class="trust-row"><span>Без реєстрації</span><span>Таймкоди не змінюються</span><span>Файл не зберігається</span></div></div><div class="quote-card"><span class="quote-time">00:04:12,080</span><p>We don't have much time.</p><div class="quote-rule"></div><p class="uk">У нас обмаль часу.</p></div></section>
-  <section class="workspace"><div class="steps"><span id="step1" class="active"><b>1</b> Файл</span><i></i><span id="step2"><b>2</b> Налаштування</span><i></i><span id="step3"><b>3</b> Результат</span></div>
-    <div id="uploadPanel" class="upload-panel"><button id="dropZone" class="drop-zone"><span class="upload-icon">↑</span><strong>Перетягни сюди файл субтитрів</strong><span>або натисни, щоб обрати на пристрої</span><small>.SRT · до 2 МБ · до 1500 реплік</small></button><input id="fileInput" class="visually-hidden" type="file" accept=".srt,application/x-subrip"><button id="sampleButton" class="sample-button">Спробувати на прикладі →</button></div>
-    <div id="translator" class="translator-grid hidden"><aside class="settings-panel"><div class="file-chip"><span class="file-icon">SRT</span><div><strong id="fileName"></strong><small id="cueTotal"></small></div><button id="resetButton" aria-label="Прибрати файл">×</button></div><label>Мова оригіналу<select id="sourceLanguage"><option>Визначити автоматично</option><option>Англійська</option><option>Польська</option><option>Німецька</option><option>Французька</option><option>Іспанська</option><option>Італійська</option><option>Російська</option></select></label><label>Стиль перекладу<select id="translationStyle"><option>Природний</option><option>Ближче до оригіналу</option><option>Розмовний</option><option>Літературний</option></select></label><label>Контекст <span class="optional">необов’язково</span><textarea id="translationContext" maxlength="2000" placeholder="Наприклад: серіал «Доктор Хаус», медична драма."></textarea></label><label>Особистий код доступу<input id="accessToken" class="access-input" type="password" autocomplete="current-password" placeholder="Введи один раз"></label><button id="translateButton" class="primary-button">Перекласти українською <span>→</span></button><div id="progressWrap" class="progress-wrap hidden"><div class="progress-track"><div id="progressFill" class="progress-fill"></div></div><span id="progressText" class="progress-text"></span></div><p class="privacy-note">Код зберігається лише в цьому браузері. Файл не зберігається на сервері.</p></aside>
-      <div class="preview-panel"><div class="preview-head"><div><p class="eyebrow">Попередній перегляд</p><h2>Перевір репліки</h2></div><div class="count"><b id="translatedCount">0</b><span id="countSuffix"></span></div></div><div id="cueList" class="cue-list"></div><div class="download-bar"><div><strong>Можна редагувати вручну</strong><span>Заповнені переклади потраплять у готовий файл</span></div><button id="downloadButton">Завантажити .uk.srt ↓</button></div></div>
+  <header class="site-header"><a class="brand" href="#top" aria-label="SubtitleFlow — на початок"><span class="brand-mark">SF</span><span>SubtitleFlow</span></a><div class="header-note"><span class="status-dot"></span>Особистий перекладач субтитрів</div></header>
+
+  <section class="hero" id="top">
+    <div class="hero-copy">
+      <p class="hero-kicker"><span class="flag"></span>Переклад українською з урахуванням контексту</p>
+      <h1>Субтитри, які звучать<br><em>живою українською.</em></h1>
+      <p class="lead">Завантаж <strong>.srt</strong> — SubtitleFlow збереже таймкоди, перекладе репліки блоками й дасть перевірити кожен рядок перед скачуванням.</p>
+      <div class="hero-actions"><button id="heroChooseFile" class="hero-primary">Обрати файл .srt <span>↑</span></button><a class="hero-secondary" href="#example">Подивитися приклад</a></div>
+      <div class="trust-row"><span>Таймкоди незмінні</span><span>До 1500 реплік</span><span>Файл не зберігається</span></div>
     </div>
-    <div id="errorBox" class="error hidden" role="alert"><strong>Не вдалося продовжити</strong><span id="errorText"></span><button id="closeError" aria-label="Закрити">×</button></div>
+    <div id="uploadPanel" class="hero-upload">
+      <button id="dropZone" class="hero-drop-zone"><span class="upload-icon">↑</span><strong>Завантажити субтитри</strong><span>Перетягни файл сюди або натисни</span><small>.SRT · ДО 2 МБ</small></button>
+      <input id="fileInput" class="visually-hidden" type="file" accept=".srt,application/x-subrip">
+      <button id="sampleButton" class="sample-button">Або спробувати тестовий файл →</button>
+    </div>
+    <div id="fileReady" class="hero-file-ready hidden"><span class="file-icon">SRT</span><div><small>Файл завантажено</small><strong id="heroReadyName"></strong><span id="heroReadyCount"></span></div><a href="#translator">Продовжити <span>↓</span></a></div>
+  </section>
+
+  <div id="errorBox" class="hero-error error hidden" role="alert"><strong>Не вдалося продовжити</strong><span id="errorText"></span><button id="closeError" aria-label="Закрити">×</button></div>
+
+  <section id="workspace" class="workspace hidden" aria-label="Переклад субтитрів">
+    <div class="steps"><span id="step1" class="active"><b>1</b> Файл</span><i></i><span id="step2"><b>2</b> Налаштування</span><i></i><span id="step3"><b>3</b> Результат</span></div>
+    <div id="translator" class="translator-grid hidden">
+      <aside class="settings-panel">
+        <div class="file-chip"><span class="file-icon">SRT</span><div><strong id="fileName"></strong><small id="cueTotal"></small></div><button id="resetButton" aria-label="Прибрати файл">×</button></div>
+        <label>Мова оригіналу<select id="sourceLanguage"><option>Визначити автоматично</option><option>Англійська</option><option>Польська</option><option>Німецька</option><option>Французька</option><option>Іспанська</option><option>Італійська</option><option>Російська</option></select></label>
+        <label>Стиль перекладу<select id="translationStyle"><option>Природний</option><option>Ближче до оригіналу</option><option>Розмовний</option><option>Літературний</option></select></label>
+        <label>Контекст <span class="optional">необов’язково</span><textarea id="translationContext" maxlength="2000" placeholder="Наприклад: серіал «Доктор Хаус», медична драма."></textarea></label>
+        <label>Особистий код доступу<input id="accessToken" class="access-input" type="password" autocomplete="current-password" placeholder="Введи один раз"></label>
+        <button id="translateButton" class="primary-button">Перекласти українською <span>→</span></button>
+        <div id="progressWrap" class="progress-wrap hidden"><div class="progress-track"><div id="progressFill" class="progress-fill"></div></div><span id="progressText" class="progress-text"></span></div>
+        <p class="privacy-note">Код зберігається лише в цьому браузері. Файл не зберігається на сервері.</p>
+      </aside>
+      <div class="preview-panel">
+        <div class="preview-head"><div><p class="eyebrow">Попередній перегляд</p><h2>Перевір репліки</h2></div><div class="count"><b id="translatedCount">0</b><span id="countSuffix"></span></div></div>
+        <div id="cueList" class="cue-list"></div>
+        <div class="download-bar"><div><strong>Можна редагувати вручну</strong><span>Заповнені переклади потраплять у готовий файл</span></div><button id="downloadButton">Завантажити .uk.srt ↓</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="example-section" id="example" aria-labelledby="example-title">
+    <div class="example-copy"><p class="eyebrow">Як це працює</p><h2 id="example-title">Один рядок — той самий таймкод</h2><p>Оригінал і переклад залишаються поруч, тому кожну репліку легко перевірити перед завантаженням готового файла.</p></div>
+    <div class="subtitle-demo" aria-hidden="true">
+      <div class="demo-top"><span><i class="window-dot"></i><i class="window-dot"></i><i class="window-dot"></i></span><b>movie.en.srt</b><small>SRT</small></div>
+      <div class="demo-cue"><span class="demo-number">#147</span><time>00:14:08,240</time><div><small>ОРИГІНАЛ</small><p>We don't have much time.</p></div></div>
+      <div class="demo-arrow">↓</div>
+      <div class="demo-cue translated"><span class="demo-number">UA</span><time>00:14:08,240</time><div><small>ПЕРЕКЛАД</small><p>У нас обмаль часу.</p></div></div>
+      <div class="demo-footer"><span><b>147</b> реплік</span><span><b>00:00</b> таймкоди збережено</span></div>
+    </div>
   </section>
   <footer><span>SubtitleFlow · відкритий український проєкт</span><span>Переклад потребує перевірки людиною</span></footer>
 </main>
@@ -39,15 +257,15 @@
   function error(message){$('errorText').textContent=message;$('errorBox').classList.remove('hidden')}
   function render(){ $('cueList').innerHTML='';cues.forEach(cue=>{const article=document.createElement('article');article.className='cue';article.dataset.cueId=cue.id;const meta=document.createElement('div');meta.className='cue-meta';const number=document.createElement('span');number.textContent='#'+cue.index;const time=document.createElement('time');time.textContent=cue.timing.split(' --> ')[0];meta.append(number,time);const original=document.createElement('p');original.textContent=cue.original;const textarea=document.createElement('textarea');textarea.placeholder='Тут з’явиться український переклад…';textarea.value=cue.translation;textarea.addEventListener('input',()=>{cue.translation=textarea.value;updateCount()});article.append(meta,original,textarea);$('cueList').append(article)});updateCount() }
   function updateCount(){const done=cues.filter(c=>c.translation.trim()).length;$('translatedCount').textContent=done;$('countSuffix').textContent='із '+cues.length}
-  function loadText(text,name){const parsed=parseSrt(text);if(!parsed.length)return error('Не вдалося знайти субтитри. Перевір, чи це справжній файл .srt із таймкодами.');if(parsed.length>1500)return error('У першій версії можна обробити до 1500 реплік.');cues=parsed;currentName=name;$('fileName').textContent=name;$('cueTotal').textContent=cues.length+' реплік';$('uploadPanel').classList.add('hidden');$('translator').classList.remove('hidden');$('step1').className='complete';$('step1').querySelector('b').textContent='✓';$('step2').className='active';render()}
+  function loadText(text,name){const parsed=parseSrt(text);if(!parsed.length)return error('Не вдалося знайти субтитри. Перевір, чи це справжній файл .srt із таймкодами.');if(parsed.length>1500)return error('У першій версії можна обробити до 1500 реплік.');cues=parsed;currentName=name;$('fileName').textContent=name;$('heroReadyName').textContent=name;$('heroReadyCount').textContent=cues.length+' реплік готові до налаштування';$('cueTotal').textContent=cues.length+' реплік';$('uploadPanel').classList.add('hidden');$('fileReady').classList.remove('hidden');$('workspace').classList.remove('hidden');$('translator').classList.remove('hidden');$('step1').className='complete';$('step1').querySelector('b').textContent='✓';$('step2').className='active';render()}
   async function handleFile(file){if(!file)return;if(!file.name.toLowerCase().endsWith('.srt'))return error('Поки що підтримується тільки формат .srt.');if(file.size>2*1024*1024)return error('Файл завеликий. Максимальний розмір — 2 МБ.');loadText(await file.text(),file.name)}
-  function reset(){if(isTranslating)return error('Дочекайся завершення поточного пакета перекладу.');cues=[];currentName='';$('translator').classList.add('hidden');$('uploadPanel').classList.remove('hidden');$('step1').className='active';$('step1').querySelector('b').textContent='1';$('step2').className='';$('fileInput').value='';$('errorBox').classList.add('hidden');$('progressWrap').classList.add('hidden')}
+  function reset(){if(isTranslating)return error('Дочекайся завершення поточного пакета перекладу.');cues=[];currentName='';$('translator').classList.add('hidden');$('workspace').classList.add('hidden');$('fileReady').classList.add('hidden');$('uploadPanel').classList.remove('hidden');$('step1').className='active';$('step1').querySelector('b').textContent='1';$('step2').className='';$('fileInput').value='';$('errorBox').classList.add('hidden');$('progressWrap').classList.add('hidden')}
   function download(){if(!cues.length)return;const text=cues.map((c,i)=>[c.index||String(i+1),c.timing,c.translation.trim()||c.original].join('\n')).join('\n\n')+'\n';const blob=new Blob([text],{type:'application/x-subrip;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=currentName.replace(/\.srt$/i,'')+'.uk.srt';a.click();URL.revokeObjectURL(url)}
   function syncCueTextarea(cue){const textarea=document.querySelector(`[data-cue-id="${cue.id}"] textarea`);if(textarea)textarea.value=cue.translation}
   function setProgress(done,total,message=''){const percent=total?Math.round(done/total*100):0;$('progressFill').style.width=percent+'%';$('progressText').textContent=message||`Перекладено ${done} із ${total} реплік (${percent}%)`;updateCount()}
   async function translateBatch(batch,token){const response=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json','X-SubtitleFlow-Access':token},body:JSON.stringify({sourceLanguage:$('sourceLanguage').value,style:$('translationStyle').value,context:$('translationContext').value,cues:batch.map(cue=>({id:cue.id,text:cue.original}))})});let data={};try{data=await response.json()}catch{}if(!response.ok)throw new Error(data.error||`Сервер повернув помилку ${response.status}.`);if(!Array.isArray(data.translations))throw new Error('Сервер не повернув переклад.');return data.translations}
   async function translateAll(){if(isTranslating||!cues.length)return;const token=$('accessToken').value.trim();if(!token)return error('Введи свій особистий код доступу.');localStorage.setItem('subtitleflow_access',token);$('errorBox').classList.add('hidden');isTranslating=true;$('translateButton').disabled=true;$('translateButton').firstChild.textContent='Перекладаємо… ';$('progressWrap').classList.remove('hidden');const pending=cues.filter(cue=>!cue.translation.trim());let completed=cues.length-pending.length;setProgress(completed,cues.length,'Готуємо переклад…');try{for(let start=0;start<pending.length;start+=BATCH_SIZE){const batch=pending.slice(start,start+BATCH_SIZE);setProgress(completed,cues.length,`Перекладаємо репліки ${completed+1}–${Math.min(completed+batch.length,cues.length)}…`);const translations=await translateBatch(batch,token);const byId=new Map(translations.map(item=>[item.id,item.text]));for(const cue of batch){const translated=byId.get(cue.id);if(!translated)throw new Error('Один із пакетів повернув неповний переклад.');cue.translation=translated;syncCueTextarea(cue)}completed+=batch.length;setProgress(completed,cues.length)}$('step2').className='complete';$('step2').querySelector('b').textContent='✓';$('step3').className='active';setProgress(cues.length,cues.length,'Переклад завершено. Перевір репліки та завантаж файл.')}catch(e){setProgress(completed,cues.length,`Збережено ${completed} із ${cues.length} реплік. Можна натиснути переклад ще раз.`);error(e.message||'Не вдалося завершити переклад.')}finally{isTranslating=false;$('translateButton').disabled=false;$('translateButton').firstChild.textContent='Перекласти українською '}}
-  $('accessToken').value=localStorage.getItem('subtitleflow_access')||'';$('dropZone').onclick=()=>$('fileInput').click();$('fileInput').onchange=e=>handleFile(e.target.files[0]);$('sampleButton').onclick=()=>loadText(SAMPLE,'example.en.srt');$('resetButton').onclick=reset;$('downloadButton').onclick=download;$('translateButton').onclick=translateAll;$('closeError').onclick=()=>$('errorBox').classList.add('hidden');
+  $('accessToken').value=localStorage.getItem('subtitleflow_access')||'';$('heroChooseFile').onclick=()=>$('fileInput').click();$('dropZone').onclick=()=>$('fileInput').click();$('fileInput').onchange=e=>handleFile(e.target.files[0]);$('sampleButton').onclick=()=>loadText(SAMPLE,'example.en.srt');$('resetButton').onclick=reset;$('downloadButton').onclick=download;$('translateButton').onclick=translateAll;$('closeError').onclick=()=>$('errorBox').classList.add('hidden');
   ;['dragenter','dragover'].forEach(type=>$('dropZone').addEventListener(type,e=>{e.preventDefault();$('dropZone').classList.add('dragging')}));['dragleave','drop'].forEach(type=>$('dropZone').addEventListener(type,e=>{e.preventDefault();$('dropZone').classList.remove('dragging')}));$('dropZone').addEventListener('drop',e=>handleFile(e.dataTransfer.files[0]));
 </script>
 </body>
